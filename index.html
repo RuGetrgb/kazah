@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Супер Казах - Руслан Балгабаев</title>
+    <style>
+        body {
+            background-color: #00AFCA;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 20 C20 20, 20 50, 50 50 C80 50, 80 20, 50 20 Z" fill="none" stroke="%23FEC50C" stroke-width="3" opacity="0.3"/><path d="M50 80 C20 80, 20 50, 50 50 C80 50, 80 80, 50 80 Z" fill="none" stroke="%23FEC50C" stroke-width="3" opacity="0.3"/><path d="M20 50 C20 20, 50 20, 50 50 C50 80, 20 80, 20 50 Z" fill="none" stroke="%23FEC50C" stroke-width="3" opacity="0.3"/><path d="M80 50 C80 20, 50 20, 50 50 C50 80, 80 80, 80 50 Z" fill="none" stroke="%23FEC50C" stroke-width="3" opacity="0.3"/></svg>');
+            color: #FEC50C;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            background: rgba(0, 175, 202, 0.95);
+            margin: 30px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 900px;
+            border: 5px solid #FEC50C;
+            border-radius: 20px;
+            box-shadow: 0 0 30px #FEC50C;
+        }
+        h1 {
+            font-size: 3.5em;
+            text-shadow: 3px 3px 6px #000;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+        .surreal-text {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #FFF;
+            text-shadow: 1px 1px 2px #000;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #FEC50C;
+            border-right: 5px solid #FEC50C;
+        }
+        .game-container {
+            margin-top: 40px;
+            padding: 30px;
+            border: 3px dashed #FEC50C;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            position: relative;
+        }
+        .avatar {
+            cursor: pointer;
+            transition: transform 0.05s;
+            user-select: none;
+            display: inline-block;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 20px #FEC50C);
+        }
+        .avatar:active {
+            transform: scale(0.95);
+        }
+        .score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #FFF;
+            text-shadow: 2px 2px 4px #000;
+        }
+        .cps {
+            font-size: 1.2em;
+            color: #ccc;
+        }
+        .upgrades {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .upgrade-btn {
+            background-color: #FEC50C;
+            color: #00AFCA;
+            border: 2px solid #FFF;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .upgrade-btn:hover:not(:disabled) {
+            background-color: #FFF;
+            color: #00AFCA;
+            transform: translateY(-2px);
+        }
+        .upgrade-btn:disabled {
+            background-color: #555;
+            color: #888;
+            border-color: #444;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        @keyframes floatAki {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(-5deg); }
+        }
+        @keyframes rotateSun {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Супер Казах</h1>
+    <h2 style="color: white; margin-top: -20px;">Эпос о Руслане Балгабаеве</h2>
+    
+    <div class="surreal-text">
+        <p>Руслан Балгабаев родился в эпицентре Великой Степи, в тот самый момент, когда метеорит из чистого казы столкнулся с домброй из антиматерии. В его жилах течет не кровь, а высокооктановый турбо-кумыс, способный запитать звездолет. Говорят, что когда Руслан хмурится, на Уолл-стрит падают акции, а когда улыбается — в пустыне расцветает бесбармак.</p>
+        <p>Рядом с ним его верная спутница — <b>кыргызская принцесса Аки</b>. Она спустилась с заснеженных пиков Тянь-Шаня верхом на квантовом снежном барсе. Аки не пьет воду — она синтезирует её из молекул радиоактивного курута. Их любовь настолько сильна, что её излучение перехватывают спутники НАСА, принимая за сигналы инопланетной цивилизации.</p>
+        <p>Твоя задача — помочь Руслану аккумулировать энергию СТЕПИ, чтобы достичь Высшей Формы Супер Казаха!</p>
+    </div>
+
+    <div class="game-container">
+        <!-- Аки (Кыргызская принцесса), скрыта до покупки -->
+        <div id="aki-container" style="display: none; position: absolute; top: 10%; left: 5%; animation: floatAki 4s infinite ease-in-out; z-index: 10;">
+            <svg width="180" height="180" viewBox="0 0 100 100">
+                <!-- Снежный барс -->
+                <path d="M 10 70 Q 30 90 80 60 Q 60 40 40 50 Q 20 40 10 70" fill="#aaccff" stroke="#fff" stroke-width="2"/>
+                <circle cx="80" cy="55" r="8" fill="#aaccff" />
+                <circle cx="82" cy="53" r="2" fill="black" />
+                <!-- Аки -->
+                <circle cx="45" cy="35" r="12" fill="#ffe0bd" />
+                <path d="M 35 35 Q 45 45 55 35" fill="none" stroke="black" stroke-width="1"/>
+                <circle cx="41" cy="33" r="1.5" fill="black" />
+                <circle cx="49" cy="33" r="1.5" fill="black" />
+                <!-- Кыргызский калпак -->
+                <path d="M 33 28 L 45 5 L 57 28 Z" fill="white" stroke="black" stroke-width="1" />
+                <path d="M 33 28 Q 45 35 57 28" fill="white" />
+                <!-- Орнамент на калпаке -->
+                <path d="M 45 15 L 45 25 M 40 20 L 50 20" stroke="black" stroke-width="1" />
+                <!-- Курут -->
+                <circle cx="58" cy="45" r="6" fill="white" stroke="#ccc" stroke-width="1" />
+                <circle cx="62" cy="42" r="2" fill="#eee" />
+                <text x="45" y="-5" font-size="10" font-weight="bold" fill="#FFF" text-shadow="1px 1px 2px black">АКИ</text>
+            </svg>
+        </div>
+
+        <div class="score">Литры Кумыса: <span id="kumis">0</span></div>
+        <div class="cps">Степная Энергия (в сек): <span id="cps">0</span></div>
+
+        <div class="avatar" onclick="clickAvatar(event)">
+            <svg width="250" height="250" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ореол Супер Казаха -->
+                <g id="halo" style="display:none; transform-origin: 100px 100px; animation: rotateSun 10s linear infinite;">
+                    <circle cx="100" cy="100" r="95" fill="#FEC50C" opacity="0.5" />
+                    <!-- Лучи -->
+                    <path d="M 100 0 L 100 200 M 0 100 L 200 100 M 30 30 L 170 170 M 30 170 L 170 30" stroke="#FEC50C" stroke-width="10" opacity="0.5" />
+                </g>
+                
+                <!-- Голова -->
+                <circle cx="100" cy="100" r="70" fill="#f4c28f" stroke="#8b4513" stroke-width="2" />
+                
+                <!-- Волосы -->
+                <path d="M 30 90 Q 100 -10 170 90 Q 150 20 100 20 Q 50 20 30 90" fill="#2c1b18" />
+                
+                <!-- Тюбетейка -->
+                <g id="tubeteika" style="display:none;">
+                    <path d="M 50 45 Q 100 -10 150 45 Z" fill="#00AFCA" stroke="#FEC50C" stroke-width="3" />
+                    <!-- Казахский узор на тюбетейке -->
+                    <path d="M 80 35 Q 100 15 120 35 Q 100 25 80 35" fill="none" stroke="#FEC50C" stroke-width="2" />
+                </g>
+
+                <!-- Брови -->
+                <path id="brow1" d="M 45 65 Q 65 55 85 65" fill="none" stroke="#2c1b18" stroke-width="4" />
+                <path id="brow2" d="M 115 65 Q 135 55 155 65" fill="none" stroke="#2c1b18" stroke-width="4" />
+
+                <!-- Глаза -->
+                <ellipse id="eye1" cx="65" cy="80" rx="14" ry="10" fill="white" stroke="black" stroke-width="1" />
+                <circle id="pupil1" cx="65" cy="80" r="5" fill="black" />
+                
+                <ellipse id="eye2" cx="135" cy="80" rx="14" ry="10" fill="white" stroke="black" stroke-width="1" />
+                <circle id="pupil2" cx="135" cy="80" r="5" fill="black" />
+                
+                <!-- Нос -->
+                <path d="M 100 80 L 95 110 L 105 110 Z" fill="#d9a372" />
+
+                <!-- Рот -->
+                <path id="mouth" d="M 70 135 Q 100 160 130 135" fill="none" stroke="black" stroke-width="3" />
+                
+                <!-- Золотой зуб -->
+                <rect id="gold-tooth" x="110" y="137" width="10" height="12" fill="gold" stroke="#b8860b" stroke-width="1" style="display:none; transform: rotate(10deg);" />
+            </svg>
+        </div>
+
+        <div class="upgrades">
+            <button id="upg1" class="upgrade-btn" onclick="buySquint()">Прищур степного волка (20 л)</button>
+            <button id="upg2" class="upgrade-btn" onclick="buyTooth()">Золотой зуб предков (100 л)</button>
+            <button id="upg3" class="upgrade-btn" onclick="buyHat()">Космическая Тюбетейка (500 л)</button>
+            <button id="upg4" class="upgrade-btn" onclick="buyAki()">Призыв Аки с Иссык-Куля (2000 л)</button>
+        </div>
+    </div>
+    <a href="http://192.168.61.194:8080" class="upgrade-btn" style="display:inline-block; margin-top:20px; text-decoration:none;">Факты про Руслана</a>
+</div>
+
+<script>
+    let kumis = 0;
+    let kumisPerClick = 1;
+    let kumisPerSecond = 0;
+    let akiMultiplier = 1;
+
+    let squintCost = 20;
+    let squintLevel = 0;
+    let eyeRy = 10;
+    let pupilR = 5;
+
+    let toothCost = 100;
+    let toothOwned = false;
+
+    let hatCost = 500;
+    let hatOwned = false;
+
+    let akiCost = 2000;
+    let akiOwned = false;
+
+    function updateDisplay() {
+        document.getElementById('kumis').innerText = Math.floor(kumis);
+        document.getElementById('cps').innerText = (kumisPerSecond * akiMultiplier);
+        
+        const btn1 = document.getElementById('upg1');
+        if (squintLevel >= 8) {
+            btn1.innerText = "МАКСИМАЛЬНЫЙ ПРИЩУР";
+            btn1.disabled = true;
+        } else {
+            btn1.innerText = `Прищур степного волка (${squintCost} л)`;
+            btn1.disabled = kumis < squintCost;
+        }
+        
+        const btn2 = document.getElementById('upg2');
+        if (toothOwned) {
+            btn2.innerText = "Зуб предков сияет!";
+            btn2.disabled = true;
+        } else {
+            btn2.innerText = `Золотой зуб предков (${toothCost} л)`;
+            btn2.disabled = kumis < toothCost;
+        }
+
+        const btn3 = document.getElementById('upg3');
+        if (hatOwned) {
+            btn3.innerText = "Связь с Тенгри установлена!";
+            btn3.disabled = true;
+        } else {
+            btn3.innerText = `Космическая Тюбетейка (${hatCost} л)`;
+            btn3.disabled = kumis < hatCost;
+        }
+
+        const btn4 = document.getElementById('upg4');
+        if (akiOwned) {
+            btn4.innerText = "Аки кормит тебя курутом! (Множитель х2)";
+            btn4.disabled = true;
+            btn4.style.backgroundColor = "#ff99cc";
+            btn4.style.color = "#000";
+        } else {
+            btn4.innerText = `Призыв Аки с Иссык-Куля (${akiCost} л)`;
+            btn4.disabled = kumis < akiCost;
+        }
+    }
+
+    function clickAvatar(event) {
+        let earned = kumisPerClick * akiMultiplier;
+        kumis += earned;
+        createFloatingText(event.clientX, event.clientY, `+${earned}`);
+        updateDisplay();
+    }
+
+    function createFloatingText(x, y, text) {
+        const el = document.createElement('div');
+        el.innerText = text;
+        el.style.position = 'fixed';
+        
+        // Randomize position slightly
+        const offsetX = (Math.random() - 0.5) * 40;
+        const offsetY = (Math.random() - 0.5) * 40;
+        
+        el.style.left = (x - 20 + offsetX) + 'px';
+        el.style.top = (y - 20 + offsetY) + 'px';
+        el.style.color = '#FFF';
+        el.style.fontWeight = 'bold';
+        el.style.fontSize = '28px';
+        el.style.pointerEvents = 'none';
+        el.style.textShadow = '2px 2px 4px #000, 0 0 10px #FEC50C';
+        el.style.transition = 'all 1s ease-out';
+        el.style.zIndex = '9999';
+        document.body.appendChild(el);
+        
+        setTimeout(() => {
+            el.style.transform = 'translateY(-80px) scale(1.5)';
+            el.style.opacity = '0';
+        }, 10);
+        
+        setTimeout(() => el.remove(), 1000);
+    }
+
+    function buySquint() {
+        if (kumis >= squintCost && squintLevel < 8) {
+            kumis -= squintCost;
+            squintCost = Math.floor(squintCost * 1.6);
+            squintLevel++;
+            kumisPerClick += 2;
+            
+            eyeRy = Math.max(1, eyeRy - 1.1);
+            pupilR = Math.max(1, pupilR - 0.5);
+            
+            document.getElementById('eye1').setAttribute('ry', eyeRy);
+            document.getElementById('eye2').setAttribute('ry', eyeRy);
+            document.getElementById('pupil1').setAttribute('r', pupilR);
+            document.getElementById('pupil2').setAttribute('r', pupilR);
+            
+            // Немного опускаем брови для суровости
+            let currentBrow1 = document.getElementById('brow1').getAttribute('d');
+            document.getElementById('brow1').setAttribute('d', currentBrow1.replace(new RegExp(55 + squintLevel - 1, 'g'), (55 + squintLevel)));
+            let currentBrow2 = document.getElementById('brow2').getAttribute('d');
+            document.getElementById('brow2').setAttribute('d', currentBrow2.replace(new RegExp(55 + squintLevel - 1, 'g'), (55 + squintLevel)));
+
+            updateDisplay();
+        }
+    }
+
+    function buyTooth() {
+        if (kumis >= toothCost && !toothOwned) {
+            kumis -= toothCost;
+            toothOwned = true;
+            kumisPerSecond += 5;
+            document.getElementById('gold-tooth').style.display = 'block';
+            updateDisplay();
+        }
+    }
+
+    function buyHat() {
+        if (kumis >= hatCost && !hatOwned) {
+            kumis -= hatCost;
+            hatOwned = true;
+            kumisPerSecond += 20;
+            document.getElementById('tubeteika').style.display = 'block';
+            document.getElementById('halo').style.display = 'block';
+            updateDisplay();
+        }
+    }
+
+    function buyAki() {
+        if (kumis >= akiCost && !akiOwned) {
+            kumis -= akiCost;
+            akiOwned = true;
+            akiMultiplier = 2; // Умножает весь доход
+            document.getElementById('aki-container').style.display = 'block';
+            setInterval(spawnKurutRain, 400);
+            updateDisplay();
+        }
+    }
+
+    // Добавляем пассивный доход
+    setInterval(() => {
+        if (kumisPerSecond > 0) {
+            kumis += (kumisPerSecond * akiMultiplier) / 10;
+            updateDisplay();
+        }
+    }, 100);
+
+    function spawnKurutRain() {
+        const el = document.createElement('div');
+        el.innerText = '⚪'; // Курут
+        el.style.position = 'fixed';
+        el.style.left = Math.random() * window.innerWidth + 'px';
+        el.style.top = '-30px';
+        el.style.fontSize = (15 + Math.random() * 20) + 'px';
+        el.style.opacity = '0.7';
+        el.style.pointerEvents = 'none';
+        el.style.zIndex = '5';
+        el.style.textShadow = '0 0 5px white';
+        document.body.appendChild(el);
+        
+        let y = -30;
+        let x = parseFloat(el.style.left);
+        const speedY = 3 + Math.random() * 4;
+        const speedX = (Math.random() - 0.5) * 2;
+        
+        const interval = setInterval(() => {
+            y += speedY;
+            x += speedX;
+            el.style.top = y + 'px';
+            el.style.left = x + 'px';
+            
+            if (y > window.innerHeight) {
+                clearInterval(interval);
+                el.remove();
+            }
+        }, 20);
+    }
+
+    // Инициализация отображения
+    updateDisplay();
+</script>
+
+</body>
+</html>
