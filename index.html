@@ -465,10 +465,6 @@
         Загружаем данные...
     </div>
 
-    <button class="weather-refresh" onclick="loadWeather()">
-        🔄 Обновить погоду
-    </button>
-
 </section>
     
     </div>
@@ -912,6 +908,7 @@ async function loadWeather() {
 
 // Автоматическая загрузка при открытии сайта
 loadWeather();
+setInterval(loadWeather, 60000);
 </script>
 
 </body>
