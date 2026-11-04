@@ -126,6 +126,63 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        .weather-section {
+    margin-top: 35px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 3px solid #FEC50C;
+    border-radius: 18px;
+    color: #fff;
+}
+
+.weather-section h2 {
+    color: #FEC50C;
+}
+
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.weather-card {
+    padding: 18px;
+    background: rgba(0, 175, 202, 0.45);
+    border: 2px solid #FEC50C;
+    border-radius: 14px;
+    text-align: left;
+}
+
+.weather-card h3 {
+    color: #FEC50C;
+    text-align: center;
+}
+
+.weather-main {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.weather-detail {
+    margin: 7px 0;
+}
+
+.weather-status {
+    margin-top: 15px;
+    color: #eee;
+}
+
+.weather-refresh {
+    margin-top: 15px;
+    padding: 10px 18px;
+    border: 2px solid white;
+    border-radius: 9px;
+    background: #FEC50C;
+    color: #006477;
+    font-weight: bold;
+    cursor: pointer;
+}
     </style>
 </head>
 
@@ -381,6 +438,37 @@
             </button>
 
         </div>
+        <section class="weather-section" id="weather">
+
+    <h2>🌤️ Погода сейчас</h2>
+
+    <div class="weather-grid">
+
+        <div class="weather-card">
+            <h3>🇰🇬 Бишкек</h3>
+            <div id="bishkek-weather">
+                Загружаем погоду...
+            </div>
+        </div>
+
+        <div class="weather-card">
+            <h3>🇰🇿 Астана</h3>
+            <div id="astana-weather">
+                Загружаем погоду...
+            </div>
+        </div>
+
+    </div>
+
+    <div class="weather-status" id="weather-updated">
+        Загружаем данные...
+    </div>
+
+    <button class="weather-refresh" onclick="loadWeather()">
+        🔄 Обновить погоду
+    </button>
+
+</section>
     </div>
 
     <!-- Локальная HTTP-ссылка удалена -->
@@ -696,6 +784,132 @@
     }
 
     updateDisplay();
+    const weatherCities = [
+    {
+        id: 'bishkek-weather',
+        latitude: 42.8746,
+        longitude: 74.5698
+    },
+    {
+        id: 'astana-weather',
+        latitude: 51.1694,
+        longitude: 71.4491
+    }
+];
+
+function describeWeather(code) {
+    const descriptions = {
+        0: 'Ясно ☀️',
+        1: 'Преимущественно ясно',
+        2: 'Переменная облачность ⛅',
+        3: 'Пасмурно ☁️',
+        45: 'Туман',
+        48: 'Туман',
+        51: 'Морось',
+        53: 'Морось',
+        55: 'Сильная морось',
+        61: 'Небольшой дождь 🌧️',
+        63: 'Дождь 🌧️',
+        65: 'Сильный дождь',
+        71: 'Небольшой снег ❄️',
+        73: 'Снег ❄️',
+        75: 'Сильный снег',
+        80: 'Ливень 🌧️',
+        81: 'Ливень',
+        82: 'Сильный ливень',
+        85: 'Снегопад ❄️',
+        86: 'Сильный снегопад',
+        95: 'Гроза ⛈️',
+        96: 'Гроза с градом',
+        99: 'Сильная гроза'
+    };
+
+    return descriptions[code] || 'Нет описания';
+}
+
+async function loadCityWeather(city) {
+    const target = document.getElementById(city.id);
+
+    target.textContent = 'Загружаем...';
+
+    const url =
+        `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error('Ошибка загрузки');
+        }
+
+        const data = await response.json();
+
+        const current = data.current;
+        const daily = data.daily;
+
+        target.innerHTML = `
+            <div class="weather-main">
+                ${Math.round(current.temperature_2m)}°C
+            </div>
+
+            <div class="weather-detail">
+                ${describeWeather(current.weather_code)}
+            </div>
+
+            <div class="weather-detail">
+                🌡️ Ощущается как:
+                <b>${Math.round(current.apparent_temperature)}°C</b>
+            </div>
+
+            <div class="weather-detail">
+                💧 Влажность:
+                <b>${current.relative_humidity_2m}%</b>
+            </div>
+
+            <div class="weather-detail">
+                💨 Ветер:
+                <b>${Math.round(current.wind_speed_10m)} км/ч</b>
+            </div>
+
+            <div class="weather-detail">
+                🌧️ Осадки:
+                <b>${current.precipitation} мм</b>
+            </div>
+
+            <div class="weather-detail">
+                ⬆️ Максимум:
+                <b>${Math.round(daily.temperature_2m_max[0])}°C</b>
+            </div>
+
+            <div class="weather-detail">
+                ⬇️ Минимум:
+                <b>${Math.round(daily.temperature_2m_min[0])}°C</b>
+            </div>
+        `;
+
+    } catch (error) {
+        target.textContent =
+            'Не удалось загрузить погоду. Проверьте интернет.';
+    }
+}
+
+async function loadWeather() {
+
+    const status =
+        document.getElementById('weather-updated');
+
+    status.textContent = 'Обновляем погоду...';
+
+    await Promise.all(
+        weatherCities.map(city => loadCityWeather(city))
+    );
+
+    status.textContent =
+        'Данные обновлены. Источник: Open-Meteo.';
+}
+
+// Автоматическая загрузка при открытии сайта
+loadWeather();
 </script>
 
 </body>
