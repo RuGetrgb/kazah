@@ -440,7 +440,9 @@
         </div>
     </div>
 <section class="weather-section" id="weather">
-
+<div id="weather-updated" class="weather-status">
+    Ожидание загрузки погоды...
+</div>
     <h2>🌤️ Погода сейчас</h2>
 
     <div class="weather-grid">
@@ -902,11 +904,28 @@ async function loadWeather() {
         'Данные обновлены. Источник: Open-Meteo.';
 }
 
-// Автоматическая загрузка при открытии сайта
-loadWeather();
-setInterval(loadWeather, 60000);
-</script>
+async function loadWeather() {
+    const status = document.getElementById('weather-updated');
 
-</body>
-</html>
+    if (status) {
+        status.textContent = 'Обновляем погоду...';
+    }
+
+    await Promise.all(
+        weatherCities.map(city => loadCityWeather(city))
+    );
+
+    if (status) {
+        status.textContent =
+            'Последнее обновление: ' +
+            new Date().toLocaleTimeString('ru-RU') +
+            ' | Источник: Open-Meteo';
+    }
+}
+
+// Загружаем погоду при открытии сайта
+loadWeather();
+
+// Автоматическое обновление каждую минуту
+setInterval(loadWeather, 60000);
 
