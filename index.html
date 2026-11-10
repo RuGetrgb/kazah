@@ -4,860 +4,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Супер Казах - Руслан Балгабаев</title>
-
+<title>Супер Казах — Эпос о Руслане</title>
 <style>
-body {
-    background-color: #00AFCA;
-    background-image: url("data:image/svg+xml;utf8,<svg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path d='M50 20 C20 20 20 50 50 50 C80 50 80 20 50 20 Z' fill='none' stroke='%23FEC50C' stroke-width='3' opacity='.3'/><path d='M50 80 C20 80 20 50 50 50 C80 50 80 80 50 80 Z' fill='none' stroke='%23FEC50C' stroke-width='3' opacity='.3'/></svg>");
-    color: #FEC50C;
-    font-family: 'Comic Sans MS', Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    overflow-x: hidden;
-}
-
-.container {
-    background: rgba(0,175,202,.95);
-    margin: 30px auto;
-    padding: 30px;
-    width: 80%;
-    max-width: 900px;
-    border: 5px solid #FEC50C;
-    border-radius: 20px;
-    box-shadow: 0 0 30px #FEC50C;
-}
-
-h1 {
-    font-size: 3.5em;
-    text-shadow: 3px 3px 6px #000;
-    margin-top: 0;
-    text-transform: uppercase;
-}
-
-.surreal-text {
-    font-size: 1.3em;
-    line-height: 1.6;
-    color: #FFF;
-    text-shadow: 1px 1px 2px #000;
-    background: rgba(0,0,0,.4);
-    padding: 20px;
-    border-radius: 15px;
-    border-left: 5px solid #FEC50C;
-    border-right: 5px solid #FEC50C;
-}
-
-.game-container {
-    margin-top: 40px;
-    padding: 30px;
-    border: 3px dashed #FEC50C;
-    background: rgba(0,0,0,.6);
-    border-radius: 20px;
-    position: relative;
-}
-
-.avatar {
-    cursor: pointer;
-    transition: transform .05s;
-    user-select: none;
-    display: inline-block;
-    margin: 20px 0;
-    filter: drop-shadow(0 0 20px #FEC50C);
-}
-
-.avatar:active {
-    transform: scale(.95);
-}
-
-.score {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #FFF;
-    text-shadow: 2px 2px 4px #000;
-}
-
-.cps {
-    font-size: 1.2em;
-    color: #ccc;
-}
-
-.upgrades {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.upgrade-btn {
-    background-color: #FEC50C;
-    color: #00AFCA;
-    border: 2px solid #FFF;
-    padding: 15px 20px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: .3s;
-    box-shadow: 0 4px 6px rgba(0,0,0,.3);
-}
-
-.upgrade-btn:hover:not(:disabled) {
-    background-color: #FFF;
-    transform: translateY(-2px);
-}
-
-.upgrade-btn:disabled {
-    background-color: #555;
-    color: #888;
-    border-color: #444;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-@keyframes floatAki {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-    100% { transform: translateY(0) rotate(-5deg); }
-}
-
-@keyframes rotateSun {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* ПОГОДА */
-
-.weather-section {
-    margin-top: 35px;
-    padding: 25px;
-    background: rgba(0,0,0,.55);
-    border: 3px solid #FEC50C;
-    border-radius: 18px;
-    color: #fff;
-}
-
-.weather-section h2 {
-    color: #FEC50C;
-}
-
-.weather-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-}
-
-.weather-card {
-    padding: 18px;
-    background: rgba(0,175,202,.45);
-    border: 2px solid #FEC50C;
-    border-radius: 14px;
-    text-align: left;
-}
-
-.weather-card h3 {
-    color: #FEC50C;
-    text-align: center;
-}
-
-.weather-main {
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-}
-
-.weather-detail {
-    margin: 7px 0;
-}
-
-.weather-status {
-    margin: 15px 0;
-    color: #eee;
-    font-size: 14px;
-}
-
-@media(max-width:600px) {
-    .container {
-        width: 88%;
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 2.2em;
-    }
-
-    .surreal-text {
-        font-size: 1em;
-    }
-
-    .score {
-        font-size: 1.7em;
-    }
-
-    .upgrade-btn {
-        font-size: 1em;
-    }
-}
+:root{--cyan:#00afca;--gold:#fec50c;--dark:#07191d;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background-color:var(--cyan);background-image:url("data:image/svg+xml;utf8,<svg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><path d='M50 20 C20 20 20 50 50 50 C80 50 80 20 50 20 Z' fill='none' stroke='%23FEC50C' stroke-width='3' opacity='.3'/><path d='M50 80 C20 80 20 50 50 50 C80 50 80 80 50 80 Z' fill='none' stroke='%23FEC50C' stroke-width='3' opacity='.3'/></svg>");font-family:'Comic Sans MS',Arial,sans-serif;color:var(--gold);text-align:center;overflow-x:hidden}
+header{padding:22px 16px 10px}h1{font-size:clamp(2.2rem,7vw,3.5rem);margin:0;text-shadow:3px 3px 6px #000;text-transform:uppercase}header p{color:white;margin:4px 0 0;font-size:1.1rem}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:15px}
+.nav-btn,.back-btn{border:2px solid white;background:var(--gold);color:#006d80;padding:11px 17px;border-radius:10px;font-weight:bold;font-size:1rem;cursor:pointer;box-shadow:0 4px 6px #0003;transition:.2s}
+.nav-btn:hover,.back-btn:hover{background:#fff;transform:translateY(-2px)}.nav-btn.active{background:#07343b;color:var(--gold);border-color:var(--gold)}
+.container{background:rgba(0,175,202,.95);margin:12px auto 35px;padding:clamp(16px,4vw,30px);width:min(92%,980px);border:5px solid var(--gold);border-radius:20px;box-shadow:0 0 30px var(--gold);min-height:450px}
+.page{display:none;animation:appear .25s ease}.page.active{display:block}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.surreal-text{font-size:1.15rem;line-height:1.65;color:#fff;text-shadow:1px 1px 2px #000;background:#0006;padding:20px;border-radius:15px;border-left:5px solid var(--gold);border-right:5px solid var(--gold)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;margin-top:25px}.menu-card{background:#0009;border:2px solid var(--gold);border-radius:15px;padding:22px;color:#fff;cursor:pointer;transition:.2s}.menu-card:hover{transform:translateY(-4px);background:#003d49}.menu-card .emoji{font-size:2.4rem}.menu-card h3{color:var(--gold);margin:8px 0}
+.game-container{margin-top:15px;padding:25px;border:3px dashed var(--gold);background:#0009;border-radius:20px;position:relative;overflow:hidden}.avatar{cursor:pointer;transition:transform .05s;user-select:none;display:inline-block;margin:20px 0;filter:drop-shadow(0 0 20px var(--gold))}.avatar:active{transform:scale(.95)}.score{font-size:clamp(1.5rem,5vw,2.5rem);font-weight:bold;color:#fff;text-shadow:2px 2px 4px #000}.cps{font-size:1.1rem;color:#ddd;margin-top:8px}.upgrades{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-top:20px}.upgrade-btn{background:var(--gold);color:#007286;border:2px solid #fff;padding:15px 12px;font-size:1rem;font-weight:bold;cursor:pointer;border-radius:10px;transition:.2s;box-shadow:0 4px 6px #0003}.upgrade-btn:hover:not(:disabled){background:#fff;transform:translateY(-2px)}.upgrade-btn:disabled{background:#555;color:#aaa;border-color:#444;cursor:not-allowed;transform:none;box-shadow:none}
+@keyframes floatAki{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(5deg)}100%{transform:translateY(0) rotate(-5deg)}}@keyframes rotateSun{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.weather-section{margin-top:10px;padding:22px;background:#0009;border:3px solid var(--gold);border-radius:18px;color:#fff}.weather-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.weather-card{padding:18px;background:#00afca73;border:2px solid var(--gold);border-radius:14px;text-align:left}.weather-card h3{text-align:center;color:var(--gold)}.weather-main{font-size:2em;font-weight:bold;text-align:center}.weather-detail{margin:7px 0}.weather-status{margin:12px 0;color:#eee;font-size:14px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:20px}.stat-card{background:#0009;border:2px solid var(--gold);border-radius:14px;padding:22px;color:white}.stat-number{font-size:2rem;font-weight:bold;color:var(--gold)}.hint{color:#fff;background:#0006;border-radius:12px;padding:14px;margin-top:20px}
+footer{color:#fff;padding:0 15px 25px;font-size:.9rem}
+@media(max-width:600px){nav{gap:7px}.nav-btn{font-size:.9rem;padding:10px 12px}.surreal-text{font-size:1rem}.game-container{padding:15px}.avatar svg{width:210px;height:210px}}
 </style>
 </head>
-
 <body>
-
-<div class="container">
-
-<h1>Супер Казах</h1>
-<h2 style="color:white;margin-top:-20px;">
-Эпос о Руслане Балгабаеве
-</h2>
-
+<header><h1>Супер Казах</h1><p>Эпос о Руслане Балгабаеве</p></header>
+<nav aria-label="Главная навигация">
+<button class="nav-btn active" data-page="home">Главная</button>
+<button class="nav-btn" data-page="game">Игровая зона</button>
+<button class="nav-btn" data-page="weather">Погода</button>
+<button class="nav-btn" data-page="upgrades">Улучшения</button>
+<button class="nav-btn" data-page="stats">Статистика</button>
+</nav>
+<main class="container">
+<section class="page active" id="home">
 <div class="surreal-text">
-
-<p>
-Руслан Балгабаев родился в эпицентре Великой Степи,
-в тот самый момент, когда метеорит из чистого казы
-столкнулся с домброй из антиматерии.
-В его жилах течет не кровь, а высокооктановый турбо-кумыс,
-способный запитать звездолет.
-Говорят, что когда Руслан хмурится, на Уолл-стрит падают акции,
-а когда улыбается — в пустыне расцветает бесбармак.
-</p>
-
-<p>
-Рядом с ним его верная спутница —
-<b>кыргызская принцесса Аки</b>.
-Она спустилась с заснеженных пиков Тянь-Шаня
-верхом на квантовом снежном барсе.
-Аки не пьет воду — она синтезирует её
-из молекул радиоактивного курута.
-Их любовь настолько сильна, что её излучение
-перехватывают спутники НАСА.
-</p>
-
-<p>
-Твоя задача — помочь Руслану аккумулировать энергию СТЕПИ,
-чтобы достичь Высшей Формы Супер Казаха!
-</p>
-
+<p>Руслан Балгабаев родился в эпицентре Великой Степи, в тот самый момент, когда метеорит из чистого казы столкнулся с домброй из антиматерии. В его жилах течет не кровь, а высокооктановый турбо-кумыс, способный запитать звездолет. Говорят, что когда Руслан хмурится, на Уолл-стрит падают акции, а когда улыбается — в пустыне расцветает бесбармак.</p>
+<p>Рядом с ним его верная спутница — <b>кыргызская принцесса Аки</b>. Она спустилась с заснеженных пиков Тянь-Шаня верхом на квантовом снежном барсе. Аки не пьет воду — она синтезирует её из молекул радиоактивного курута. Их любовь настолько сильна, что её излучение перехватывают спутники НАСА.</p>
+<p>Твоя задача — помочь Руслану аккумулировать энергию СТЕПИ, чтобы достичь Высшей Формы Супер Казаха!</p>
 </div>
-
-<div class="game-container">
-
-<!-- АКИ -->
-
-<div id="aki-container"
-style="display:none;position:absolute;top:10%;left:5%;
-animation:floatAki 4s infinite ease-in-out;z-index:10;">
-
-<svg width="180" height="180" viewBox="0 0 100 100">
-
-<path d="M10 70 Q30 90 80 60 Q60 40 40 50 Q20 40 10 70"
-fill="#aaccff" stroke="#fff" stroke-width="2"/>
-
-<circle cx="80" cy="55" r="8" fill="#aaccff"/>
-<circle cx="82" cy="53" r="2" fill="black"/>
-
-<circle cx="45" cy="35" r="12" fill="#ffe0bd"/>
-
-<path d="M35 35 Q45 45 55 35"
-fill="none" stroke="black"/>
-
-<circle cx="41" cy="33" r="1.5" fill="black"/>
-<circle cx="49" cy="33" r="1.5" fill="black"/>
-
-<path d="M33 28 L45 5 L57 28 Z"
-fill="white" stroke="black"/>
-
-<path d="M45 15 L45 25 M40 20 L50 20"
-stroke="black"/>
-
-<circle cx="58" cy="45" r="6" fill="white"/>
-
-<text x="45" y="-5" font-size="10"
-font-weight="bold" fill="#FFF">АКИ</text>
-
-</svg>
+<div class="menu-grid">
+<div class="menu-card" data-open="game"><div class="emoji">🕹️</div><h3>Игровая зона</h3><p>Нажимай на аватар и собирай кумыс.</p></div>
+<div class="menu-card" data-open="weather"><div class="emoji">🌤️</div><h3>Погода</h3><p>Узнай погоду в Ташкенте и Астане.</p></div>
+<div class="menu-card" data-open="upgrades"><div class="emoji">⚡</div><h3>Улучшения</h3><p>Открывай новые способности.</p></div>
+<div class="menu-card" data-open="stats"><div class="emoji">📊</div><h3>Статистика</h3><p>Следи за своим игровым прогрессом.</p></div>
 </div>
-
-<div class="score">
-Литры Кумыса:
-<span id="kumis">0</span>
-</div>
-
-<div class="cps">
-Степная Энергия (в сек):
-<span id="cps">0</span>
-</div>
-
-<div class="avatar" onclick="clickAvatar(event)">
-
-<svg width="250" height="250" viewBox="0 0 200 200"
-xmlns="http://www.w3.org/2000/svg">
-
-<g id="halo"
-style="display:none;transform-origin:100px 100px;
-animation:rotateSun 10s linear infinite;">
-
-<circle cx="100" cy="100" r="95"
-fill="#FEC50C" opacity=".5"/>
-
-<path d="M100 0 L100 200 M0 100 L200 100
-M30 30 L170 170 M30 170 L170 30"
-stroke="#FEC50C" stroke-width="10" opacity=".5"/>
-
-</g>
-
-<circle cx="100" cy="100" r="70"
-fill="#f4c28f" stroke="#8b4513" stroke-width="2"/>
-
-<path d="M30 90 Q100 -10 170 90
-Q150 20 100 20 Q50 20 30 90"
-fill="#2c1b18"/>
-
-<g id="tubeteika" style="display:none;">
-
-<path d="M50 45 Q100 -10 150 45 Z"
-fill="#00AFCA" stroke="#FEC50C" stroke-width="3"/>
-
-<path d="M80 35 Q100 15 120 35 Q100 25 80 35"
-fill="none" stroke="#FEC50C" stroke-width="2"/>
-
-</g>
-
-<path id="brow1" d="M45 65 Q65 55 85 65"
-fill="none" stroke="#2c1b18" stroke-width="4"/>
-
-<path id="brow2" d="M115 65 Q135 55 155 65"
-fill="none" stroke="#2c1b18" stroke-width="4"/>
-
-<ellipse id="eye1" cx="65" cy="80" rx="14" ry="10"
-fill="white" stroke="black"/>
-
-<circle id="pupil1" cx="65" cy="80" r="5" fill="black"/>
-
-<ellipse id="eye2" cx="135" cy="80" rx="14" ry="10"
-fill="white" stroke="black"/>
-
-<circle id="pupil2" cx="135" cy="80" r="5" fill="black"/>
-
-<path d="M100 80 L95 110 L105 110 Z" fill="#d9a372"/>
-
-<path id="mouth" d="M70 135 Q100 160 130 135"
-fill="none" stroke="black" stroke-width="3"/>
-
-<rect id="gold-tooth" x="110" y="137"
-width="10" height="12" fill="gold"
-stroke="#b8860b" style="display:none"/>
-
-</svg>
-</div>
-
-<div class="upgrades">
-
-<button id="upg1" class="upgrade-btn" onclick="buySquint()">
-Прищур степного волка (20 л)
-</button>
-
-<button id="upg2" class="upgrade-btn" onclick="buyTooth()">
-Золотой зуб предков (100 л)
-</button>
-
-<button id="upg3" class="upgrade-btn" onclick="buyHat()">
-Космическая Тюбетейка (500 л)
-</button>
-
-<button id="upg4" class="upgrade-btn" onclick="buyAki()">
-Призыв Аки с Иссык-Куля (2000 л)
-</button>
-
-</div>
-</div>
-
-<!-- ПОГОДА -->
-
-<section class="weather-section" id="weather">
-
-<h2>Погода сейчас</h2>
-
-<div id="weather-updated" class="weather-status">
-Загружаем данные о погоде...
-</div>
-
-<div class="weather-grid">
-
-<div class="weather-card">
-<h3>🇺🇿 Ташкент</h3>
-<div id="tashkent-weather">
-Загружаем погоду...
-</div>
-</div>
-
-<div class="weather-card">
-<h3>🇰🇿 Астана</h3>
-<div id="astana-weather">
-Загружаем погоду...
-</div>
-</div>
-
-</div>
-
 </section>
-
+<section class="page" id="game">
+<h2>Игровая зона</h2>
+<div class="game-container">
+<div id="aki-container" style="display:none;position:absolute;top:10%;left:5%;animation:floatAki 4s infinite ease-in-out;z-index:10"><svg width="150" height="150" viewBox="0 0 100 100"><path d="M10 70 Q30 90 80 60 Q60 40 40 50 Q20 40 10 70" fill="#aaccff" stroke="#fff" stroke-width="2"/><circle cx="80" cy="55" r="8" fill="#aaccff"/><circle cx="82" cy="53" r="2" fill="black"/><circle cx="45" cy="35" r="12" fill="#ffe0bd"/><path d="M35 35 Q45 45 55 35" fill="none" stroke="black"/><circle cx="41" cy="33" r="1.5"/><circle cx="49" cy="33" r="1.5"/><path d="M33 28 L45 5 L57 28 Z" fill="white" stroke="black"/><path d="M45 15 L45 25 M40 20 L50 20" stroke="black"/><circle cx="58" cy="45" r="6" fill="white"/><text x="45" y="-5" font-size="10" font-weight="bold" fill="#fff">АКИ</text></svg></div>
+<div class="score">Литры Кумыса: <span id="kumis">0</span></div>
+<div class="cps">Степная Энергия (в сек): <span id="cps">0</span></div>
+<div class="avatar" id="avatar" role="button" tabindex="0" aria-label="Нажми, чтобы получить кумыс">
+<svg width="250" height="250" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<g id="halo" style="display:none;transform-origin:100px 100px;animation:rotateSun 10s linear infinite"><circle cx="100" cy="100" r="95" fill="#FEC50C" opacity=".5"/><path d="M100 0 L100 200 M0 100 L200 100 M30 30 L170 170 M30 170 L170 30" stroke="#FEC50C" stroke-width="10" opacity=".5"/></g>
+<circle cx="100" cy="100" r="70" fill="#f4c28f" stroke="#8b4513" stroke-width="2"/><path d="M30 90 Q100 -10 170 90 Q150 20 100 20 Q50 20 30 90" fill="#2c1b18"/>
+<g id="tubeteika" style="display:none"><path d="M50 45 Q100 -10 150 45 Z" fill="#00AFCA" stroke="#FEC50C" stroke-width="3"/><path d="M80 35 Q100 15 120 35 Q100 25 80 35" fill="none" stroke="#FEC50C" stroke-width="2"/></g>
+<path d="M45 65 Q65 55 85 65" fill="none" stroke="#2c1b18" stroke-width="4"/><path d="M115 65 Q135 55 155 65" fill="none" stroke="#2c1b18" stroke-width="4"/>
+<ellipse id="eye1" cx="65" cy="80" rx="14" ry="10" fill="white" stroke="black"/><circle id="pupil1" cx="65" cy="80" r="5" fill="black"/><ellipse id="eye2" cx="135" cy="80" rx="14" ry="10" fill="white" stroke="black"/><circle id="pupil2" cx="135" cy="80" r="5" fill="black"/>
+<path d="M100 80 L95 110 L105 110 Z" fill="#d9a372"/><path d="M70 135 Q100 160 130 135" fill="none" stroke="black" stroke-width="3"/><rect id="gold-tooth" x="110" y="137" width="10" height="12" fill="gold" stroke="#b8860b" style="display:none"/>
+</svg></div>
+<p class="hint">Нажимай на аватар, чтобы получать кумыс. Улучшения и прогресс сохраняются автоматически.</p>
 </div>
-
+</section>
+<section class="page" id="weather">
+<h2>Погода сейчас</h2><div class="weather-section"><div id="weather-updated" class="weather-status">Загружаем данные о погоде...</div><div class="weather-grid">
+<div class="weather-card"><h3>🇺🇿 Ташкент</h3><div id="tashkent-weather">Загружаем погоду...</div></div>
+<div class="weather-card"><h3>🇰🇿 Астана</h3><div id="astana-weather">Загружаем погоду...</div></div>
+</div></div><p class="hint">Источник данных: Open-Meteo. Погода обновляется автоматически каждую минуту.</p>
+</section>
+<section class="page" id="upgrades">
+<h2>Улучшения Руслана</h2><p class="hint">Покупай улучшения за накопленный кумыс. Некоторые предметы дают пассивный доход.</p>
+<div class="upgrades">
+<button id="upg1" class="upgrade-btn">Прищур степного волка (20 л)</button>
+<button id="upg2" class="upgrade-btn">Золотой зуб предков (100 л)</button>
+<button id="upg3" class="upgrade-btn">Космическая Тюбетейка (500 л)</button>
+<button id="upg4" class="upgrade-btn">Призыв Аки с Иссык-Куля (2000 л)</button>
+</div>
+</section>
+<section class="page" id="stats">
+<h2>Статистика степной энергии</h2><div class="stats-grid">
+<div class="stat-card">Всего кликов<div class="stat-number" id="stat-clicks">0</div></div>
+<div class="stat-card">Всего заработано кумыса<div class="stat-number" id="stat-earned">0</div></div>
+<div class="stat-card">Куплено улучшений<div class="stat-number" id="stat-upgrades">0</div></div>
+<div class="stat-card">Текущий баланс<div class="stat-number" id="stat-balance">0</div></div>
+</div><button class="upgrade-btn" id="reset-save" style="margin-top:22px">Сбросить сохранение</button><p class="hint">Статистика хранится только в этом браузере на данном устройстве.</p>
+</section>
+</main>
+<footer>Супер Казах · Учебный проект на HTML, CSS и JavaScript</footer>
 <script>
+// Навигация между мини-страницами сайта
+function showPage(pageId){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===pageId));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===pageId));if(pageId==='weather')loadWeather();window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+document.querySelectorAll('[data-open]').forEach(c=>c.addEventListener('click',()=>showPage(c.dataset.open)));
 
-/* =========================
-   ИГРА СУПЕР КАЗАХ
-========================= */
-
-let kumis = 0;
-let kumisPerClick = 1;
-let kumisPerSecond = 0;
-let akiMultiplier = 1;
-
-let squintCost = 20;
-let squintLevel = 0;
-let eyeRy = 10;
-let pupilR = 5;
-
-let toothCost = 100;
-let toothOwned = false;
-
-let hatCost = 500;
-let hatOwned = false;
-
-let akiCost = 2000;
-let akiOwned = false;
-
-function updateDisplay() {
-
-    document.getElementById('kumis').innerText =
-        Math.floor(kumis);
-
-    document.getElementById('cps').innerText =
-        kumisPerSecond * akiMultiplier;
-
-    const btn1 = document.getElementById('upg1');
-
-    if (squintLevel >= 8) {
-        btn1.innerText = "МАКСИМАЛЬНЫЙ ПРИЩУР";
-        btn1.disabled = true;
-    } else {
-        btn1.innerText =
-            `Прищур степного волка (${squintCost} л)`;
-        btn1.disabled = kumis < squintCost;
-    }
-
-    const btn2 = document.getElementById('upg2');
-
-    if (toothOwned) {
-        btn2.innerText = "Зуб предков сияет!";
-        btn2.disabled = true;
-    } else {
-        btn2.innerText =
-            `Золотой зуб предков (${toothCost} л)`;
-        btn2.disabled = kumis < toothCost;
-    }
-
-    const btn3 = document.getElementById('upg3');
-
-    if (hatOwned) {
-        btn3.innerText = "Связь с Тенгри установлена!";
-        btn3.disabled = true;
-    } else {
-        btn3.innerText =
-            `Космическая Тюбетейка (${hatCost} л)`;
-        btn3.disabled = kumis < hatCost;
-    }
-
-    const btn4 = document.getElementById('upg4');
-
-    if (akiOwned) {
-        btn4.innerText =
-            "Аки кормит тебя курутом! (Множитель х2)";
-        btn4.disabled = true;
-        btn4.style.backgroundColor = "#ff99cc";
-        btn4.style.color = "#000";
-    } else {
-        btn4.innerText =
-            `Призыв Аки с Иссык-Куля (${akiCost} л)`;
-        btn4.disabled = kumis < akiCost;
-    }
+// Сохранение прогресса в localStorage
+const SAVE_KEY='superKazakhSaveV1';
+const defaultState={kumis:0,kumisPerClick:1,kumisPerSecond:0,akiMultiplier:1,squintCost:20,squintLevel:0,eyeRy:10,pupilR:5,toothCost:100,toothOwned:false,hatCost:500,hatOwned:false,akiCost:2000,akiOwned:false,clicks:0,totalEarned:0};
+let state={...defaultState};
+function loadSave(){try{const saved=JSON.parse(localStorage.getItem(SAVE_KEY));if(saved&&typeof saved==='object')state={...defaultState,...saved};}catch(e){console.warn('Не удалось прочитать сохранение',e)}}
+function saveGame(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(state));}catch(e){console.warn('Не удалось сохранить игру',e)}}
+loadSave();
+const $=id=>document.getElementById(id);
+function updateDisplay(){
+$('kumis').textContent=Math.floor(state.kumis);$('cps').textContent=state.kumisPerSecond*state.akiMultiplier;
+$('upg1').textContent=state.squintLevel>=8?'МАКСИМАЛЬНЫЙ ПРИЩУР':`Прищур степного волка (${state.squintCost} л)`;$('upg1').disabled=state.kumis<state.squintCost||state.squintLevel>=8;
+$('upg2').textContent=state.toothOwned?'Зуб предков сияет!':`Золотой зуб предков (${state.toothCost} л)`;$('upg2').disabled=state.kumis<state.toothCost||state.toothOwned;
+$('upg3').textContent=state.hatOwned?'Связь с Тенгри установлена!':`Космическая Тюбетейка (${state.hatCost} л)`;$('upg3').disabled=state.kumis<state.hatCost||state.hatOwned;
+$('upg4').textContent=state.akiOwned?'Аки кормит тебя курутом! (Множитель х2)':`Призыв Аки с Иссык-Куля (${state.akiCost} л)`;$('upg4').disabled=state.kumis<state.akiCost||state.akiOwned;
+$('eye1').setAttribute('ry',state.eyeRy);$('eye2').setAttribute('ry',state.eyeRy);$('pupil1').setAttribute('r',state.pupilR);$('pupil2').setAttribute('r',state.pupilR);
+$('gold-tooth').style.display=state.toothOwned?'block':'none';$('tubeteika').style.display=state.hatOwned?'block':'none';$('halo').style.display=state.hatOwned?'block':'none';$('aki-container').style.display=state.akiOwned?'block':'none';
+$('stat-clicks').textContent=state.clicks;$('stat-earned').textContent=Math.floor(state.totalEarned);$('stat-upgrades').textContent=state.squintLevel+(state.toothOwned?1:0)+(state.hatOwned?1:0)+(state.akiOwned?1:0);$('stat-balance').textContent=Math.floor(state.kumis);
 }
-
-function clickAvatar(event) {
-
-    let earned = kumisPerClick * akiMultiplier;
-    kumis += earned;
-
-    createFloatingText(
-        event.clientX,
-        event.clientY,
-        `+${earned}`
-    );
-
-    updateDisplay();
-}
-
-function createFloatingText(x, y, text) {
-
-    const el = document.createElement('div');
-
-    el.innerText = text;
-    el.style.position = 'fixed';
-
-    el.style.left =
-        (x - 20 + (Math.random() - .5) * 40) + 'px';
-
-    el.style.top =
-        (y - 20 + (Math.random() - .5) * 40) + 'px';
-
-    el.style.color = '#FFF';
-    el.style.fontWeight = 'bold';
-    el.style.fontSize = '28px';
-    el.style.pointerEvents = 'none';
-    el.style.textShadow = '2px 2px 4px #000, 0 0 10px #FEC50C';
-    el.style.transition = 'all 1s ease-out';
-    el.style.zIndex = '9999';
-
-    document.body.appendChild(el);
-
-    setTimeout(() => {
-        el.style.transform = 'translateY(-80px) scale(1.5)';
-        el.style.opacity = '0';
-    }, 10);
-
-    setTimeout(() => el.remove(), 1000);
-}
-
-function buySquint() {
-
-    if (kumis >= squintCost && squintLevel < 8) {
-
-        kumis -= squintCost;
-        squintCost = Math.floor(squintCost * 1.6);
-
-        squintLevel++;
-        kumisPerClick += 2;
-
-        eyeRy = Math.max(1, eyeRy - 1.1);
-        pupilR = Math.max(1, pupilR - .5);
-
-        document.getElementById('eye1').setAttribute('ry', eyeRy);
-        document.getElementById('eye2').setAttribute('ry', eyeRy);
-
-        document.getElementById('pupil1').setAttribute('r', pupilR);
-        document.getElementById('pupil2').setAttribute('r', pupilR);
-
-        updateDisplay();
-    }
-}
-
-function buyTooth() {
-
-    if (kumis >= toothCost && !toothOwned) {
-
-        kumis -= toothCost;
-        toothOwned = true;
-
-        kumisPerSecond += 5;
-
-        document.getElementById('gold-tooth')
-            .style.display = 'block';
-
-        updateDisplay();
-    }
-}
-
-function buyHat() {
-
-    if (kumis >= hatCost && !hatOwned) {
-
-        kumis -= hatCost;
-        hatOwned = true;
-
-        kumisPerSecond += 20;
-
-        document.getElementById('tubeteika')
-            .style.display = 'block';
-
-        document.getElementById('halo')
-            .style.display = 'block';
-
-        updateDisplay();
-    }
-}
-
-function buyAki() {
-
-    if (kumis >= akiCost && !akiOwned) {
-
-        kumis -= akiCost;
-        akiOwned = true;
-
-        akiMultiplier = 2;
-
-        document.getElementById('aki-container')
-            .style.display = 'block';
-
-        setInterval(spawnKurutRain, 400);
-
-        updateDisplay();
-    }
-}
-
-setInterval(() => {
-
-    if (kumisPerSecond > 0) {
-
-        kumis +=
-            (kumisPerSecond * akiMultiplier) / 10;
-
-        updateDisplay();
-    }
-
-}, 100);
-
-function spawnKurutRain() {
-
-    const el = document.createElement('div');
-
-    el.innerText = '⚪';
-    el.style.position = 'fixed';
-    el.style.left = Math.random() * window.innerWidth + 'px';
-    el.style.top = '-30px';
-    el.style.fontSize = (15 + Math.random() * 20) + 'px';
-    el.style.opacity = '.7';
-    el.style.pointerEvents = 'none';
-    el.style.zIndex = '5';
-    el.style.textShadow = '0 0 5px white';
-
-    document.body.appendChild(el);
-
-    let y = -30;
-    let x = parseFloat(el.style.left);
-
-    const speedY = 3 + Math.random() * 4;
-    const speedX = (Math.random() - .5) * 2;
-
-    const interval = setInterval(() => {
-
-        y += speedY;
-        x += speedX;
-
-        el.style.top = y + 'px';
-        el.style.left = x + 'px';
-
-        if (y > window.innerHeight) {
-            clearInterval(interval);
-            el.remove();
-        }
-
-    }, 20);
-}
-
-updateDisplay();
-
-
-/* =========================
-   ПОГОДА OPEN-METEO
-========================= */
-
-const weatherCities = [
-
-    {
-        id: 'tashkent-weather',
-        latitude: 41.2995,
-        longitude: 69.2401
-    },
-
-    {
-        id: 'astana-weather',
-        latitude: 51.1694,
-        longitude: 71.4491
-    }
-
-];
-
-function describeWeather(code) {
-
-    const descriptions = {
-
-        0: 'Ясно ☀️',
-        1: 'Преимущественно ясно 🌤️',
-        2: 'Переменная облачность ⛅',
-        3: 'Пасмурно ☁️',
-
-        45: 'Туман 🌫️',
-        48: 'Туман 🌫️',
-
-        51: 'Лёгкая морось',
-        53: 'Морось 🌧️',
-        55: 'Сильная морось',
-
-        61: 'Небольшой дождь 🌧️',
-        63: 'Дождь 🌧️',
-        65: 'Сильный дождь',
-
-        71: 'Небольшой снег ❄️',
-        73: 'Снег ❄️',
-        75: 'Сильный снег',
-
-        80: 'Ливень 🌧️',
-        81: 'Ливень',
-        82: 'Сильный ливень',
-
-        85: 'Снегопад ❄️',
-        86: 'Сильный снегопад',
-
-        95: 'Гроза ⛈️',
-        96: 'Гроза с градом',
-        99: 'Сильная гроза с градом'
-
-    };
-
-    return descriptions[code] || 'Нет описания';
-}
-
-
-async function loadCityWeather(city) {
-
-    const target = document.getElementById(city.id);
-
-    if (!target) return false;
-
-    target.textContent = 'Загружаем погоду...';
-
-    const url =
-        `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
-
-    try {
-
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error('Ошибка сервера: ' + response.status);
-        }
-
-        const data = await response.json();
-
-        if (!data.current || !data.daily) {
-            throw new Error('Нет данных о погоде');
-        }
-
-        const current = data.current;
-        const daily = data.daily;
-
-        target.innerHTML = `
-
-            <div class="weather-main">
-                ${Math.round(current.temperature_2m)}°C
-            </div>
-
-            <div class="weather-detail">
-                ${describeWeather(current.weather_code)}
-            </div>
-
-            <div class="weather-detail">
-                🌡️ Ощущается как:
-                <b>${Math.round(current.apparent_temperature)}°C</b>
-            </div>
-
-            <div class="weather-detail">
-                💧 Влажность:
-                <b>${current.relative_humidity_2m}%</b>
-            </div>
-
-            <div class="weather-detail">
-                💨 Ветер:
-                <b>${Math.round(current.wind_speed_10m)} км/ч</b>
-            </div>
-
-            <div class="weather-detail">
-                🌧️ Осадки:
-                <b>${current.precipitation} мм</b>
-            </div>
-
-            <div class="weather-detail">
-                ⬆️ Максимум:
-                <b>${Math.round(daily.temperature_2m_max[0])}°C</b>
-            </div>
-
-            <div class="weather-detail">
-                ⬇️ Минимум:
-                <b>${Math.round(daily.temperature_2m_min[0])}°C</b>
-            </div>
-
-        `;
-
-        return true;
-
-    } catch (error) {
-
-        console.error('Ошибка погоды:', city.id, error);
-
-        target.textContent =
-            'Не удалось загрузить погоду. Проверьте интернет и попробуйте позже.';
-
-        return false;
-    }
-}
-
-
-async function loadWeather() {
-
-    const status =
-        document.getElementById('weather-updated');
-
-    if (status) {
-        status.textContent = 'Обновляем погоду...';
-    }
-
-    const results = await Promise.all(
-        weatherCities.map(city => loadCityWeather(city))
-    );
-
-    const successCount =
-        results.filter(Boolean).length;
-
-    if (status) {
-
-        if (successCount === 2) {
-
-            status.textContent =
-                'Последнее обновление: ' +
-                new Date().toLocaleTimeString('ru-RU') +
-                ' | Источник: Open-Meteo';
-
-        } else if (successCount === 1) {
-
-            status.textContent =
-                'Загружена погода одного города. ' +
-                new Date().toLocaleTimeString('ru-RU');
-
-        } else {
-
-            status.textContent =
-                'Не удалось получить данные. Проверьте интернет.';
-
-        }
-    }
-}
-
-
-/* Загрузка при открытии страницы */
-
-loadWeather();
-
-
-/* Автоматическое обновление каждые 60 секунд */
-
-setInterval(loadWeather, 60000);
-
+function addKumis(amount){state.kumis+=amount;state.totalEarned+=amount;saveGame();updateDisplay()}
+function clickAvatar(event){const earned=state.kumisPerClick*state.akiMultiplier;state.clicks++;addKumis(earned);if(event&&event.clientX!==undefined)createFloatingText(event.clientX,event.clientY,`+${earned}`)}
+$('avatar').addEventListener('click',clickAvatar);$('avatar').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();clickAvatar({clientX:window.innerWidth/2,clientY:window.innerHeight/2})}});
+function createFloatingText(x,y,text){const el=document.createElement('div');el.textContent=text;Object.assign(el.style,{position:'fixed',left:(x-20+(Math.random()-.5)*40)+'px',top:(y-20+(Math.random()-.5)*40)+'px',color:'#fff',fontWeight:'bold',fontSize:'28px',pointerEvents:'none',textShadow:'2px 2px 4px #000,0 0 10px #FEC50C',transition:'all 1s ease-out',zIndex:'9999'});document.body.appendChild(el);setTimeout(()=>{el.style.transform='translateY(-80px) scale(1.5)';el.style.opacity='0'},10);setTimeout(()=>el.remove(),1000)}
+function buySquint(){if(state.kumis>=state.squintCost&&state.squintLevel<8){state.kumis-=state.squintCost;state.squintCost=Math.floor(state.squintCost*1.6);state.squintLevel++;state.kumisPerClick+=2;state.eyeRy=Math.max(1,state.eyeRy-1.1);state.pupilR=Math.max(1,state.pupilR-.5);saveGame();updateDisplay()}}
+function buyTooth(){if(state.kumis>=state.toothCost&&!state.toothOwned){state.kumis-=state.toothCost;state.toothOwned=true;state.kumisPerSecond+=5;saveGame();updateDisplay()}}
+function buyHat(){if(state.kumis>=state.hatCost&&!state.hatOwned){state.kumis-=state.hatCost;state.hatOwned=true;state.kumisPerSecond+=20;saveGame();updateDisplay()}}
+function buyAki(){if(state.kumis>=state.akiCost&&!state.akiOwned){state.kumis-=state.akiCost;state.akiOwned=true;state.akiMultiplier=2;saveGame();updateDisplay();startKurutRain()}}
+$('upg1').addEventListener('click',buySquint);$('upg2').addEventListener('click',buyTooth);$('upg3').addEventListener('click',buyHat);$('upg4').addEventListener('click',buyAki);
+setInterval(()=>{if(state.kumisPerSecond>0)addKumis(state.kumisPerSecond*state.akiMultiplier/10)},100);
+let kurutRainStarted=false;function startKurutRain(){if(kurutRainStarted)return;kurutRainStarted=true;setInterval(spawnKurutRain,400)}
+function spawnKurutRain(){const el=document.createElement('div');el.textContent='⚪';Object.assign(el.style,{position:'fixed',left:Math.random()*window.innerWidth+'px',top:'-30px',fontSize:(15+Math.random()*20)+'px',opacity:'.7',pointerEvents:'none',zIndex:'5',textShadow:'0 0 5px white'});document.body.appendChild(el);let y=-30,x=parseFloat(el.style.left);const sy=3+Math.random()*4,sx=(Math.random()-.5)*2;const timer=setInterval(()=>{y+=sy;x+=sx;el.style.top=y+'px';el.style.left=x+'px';if(y>window.innerHeight){clearInterval(timer);el.remove()}},20)}
+$('reset-save').addEventListener('click',()=>{if(confirm('Точно сбросить весь игровой прогресс?')){state={...defaultState};saveGame();updateDisplay();}});
+updateDisplay();if(state.akiOwned)startKurutRain();
+
+// Погода Open-Meteo: Ташкент и Астана
+const weatherCities=[{id:'tashkent-weather',latitude:41.2995,longitude:69.2401},{id:'astana-weather',latitude:51.1694,longitude:71.4491}];
+function describeWeather(code){const d={0:'Ясно ☀️',1:'Преимущественно ясно 🌤️',2:'Переменная облачность ⛅',3:'Пасмурно ☁️',45:'Туман 🌫️',48:'Туман 🌫️',51:'Лёгкая морось',53:'Морось 🌧️',55:'Сильная морось',61:'Небольшой дождь 🌧️',63:'Дождь 🌧️',65:'Сильный дождь',71:'Небольшой снег ❄️',73:'Снег ❄️',75:'Сильный снег',80:'Ливень 🌧️',81:'Ливень',82:'Сильный ливень',85:'Снегопад ❄️',86:'Сильный снегопад',95:'Гроза ⛈️',96:'Гроза с градом',99:'Сильная гроза с градом'};return d[code]||'Нет описания'}
+async function loadCityWeather(city){const target=$(city.id);if(!target)return false;target.textContent='Загружаем погоду...';const url=`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;try{const response=await fetch(url);if(!response.ok)throw new Error('Ошибка сервера: '+response.status);const data=await response.json();if(!data.current||!data.daily)throw new Error('Нет данных о погоде');const c=data.current,d=data.daily;target.innerHTML=`<div class="weather-main">${Math.round(c.temperature_2m)}°C</div><div class="weather-detail">${describeWeather(c.weather_code)}</div><div class="weather-detail">🌡️ Ощущается как: <b>${Math.round(c.apparent_temperature)}°C</b></div><div class="weather-detail">💧 Влажность: <b>${c.relative_humidity_2m}%</b></div><div class="weather-detail">💨 Ветер: <b>${Math.round(c.wind_speed_10m)} км/ч</b></div><div class="weather-detail">🌧️ Осадки: <b>${c.precipitation} мм</b></div><div class="weather-detail">⬆️ Максимум: <b>${Math.round(d.temperature_2m_max[0])}°C</b></div><div class="weather-detail">⬇️ Минимум: <b>${Math.round(d.temperature_2m_min[0])}°C</b></div>`;return true}catch(error){console.error('Ошибка погоды:',city.id,error);target.textContent='Не удалось загрузить погоду. Проверьте интернет.';return false}}
+async function loadWeather(){const status=$('weather-updated');if(status)status.textContent='Обновляем погоду...';const results=await Promise.all(weatherCities.map(loadCityWeather));const ok=results.filter(Boolean).length;if(status)status.textContent=ok===2?'Последнее обновление: '+new Date().toLocaleTimeString('ru-RU')+' | Источник: Open-Meteo':ok===1?'Загружена погода одного города. '+new Date().toLocaleTimeString('ru-RU'):'Не удалось получить данные. Проверьте интернет.'}
+loadWeather();setInterval(loadWeather,60000);
 </script>
-
 </body>
 </html>
-
-
